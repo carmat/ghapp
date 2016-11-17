@@ -1,8 +1,12 @@
+# System
 .DS_Store
 Thumbs.db
 desktop.ini
 
+# NPM
 node_modules
+npm-debug.log
 
+# App
 app/**/*.js
 app/**/*.js.map
