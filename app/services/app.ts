@@ -1,5 +1,8 @@
 import { Injectable }     from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {
+    Http, Response, Headers,
+    RequestOptions, Jsonp, URLSearchParams
+} from '@angular/http';
 import { Repo }           from '../models/repo';
 
 import { Observable } from 'rxjs';
@@ -12,7 +15,23 @@ export class GithubRepoService {
     apiUrl = 'https://api.github.com/search/repositories?q=';
     private headers = new Headers({'Content-Type': 'application/json'});
 
-    constructor(private http: Http) {}
+    constructor(
+        private http: Http,
+        private jsonp: Jsonp,
+    ) {}
+
+    searchRepos(term: string) {
+        let params = new URLSearchParams();
+
+        params.set('search', term);
+        params.set('sort', 'stars');
+        params.set('order', 'desc');
+        // params.set('callback', 'JSONP_CALLBACK');
+
+        return this.jsonp.get(apiUrl, { search: params })
+            .map(this.extractData);
+            // .map(response => <string[]> response.json()[1]);
+    }
 
     getRepos(term: String): Observable<Repo[]> {
         this.apiUrl += term || 'bootstrap';

@@ -7,6 +7,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 import { GithubRepoService } from '../services/app';
 import { Repo }           from '../models/repo';
@@ -28,28 +29,25 @@ export class AppComponent implements OnInit {
         private githubRepoService: GithubRepoService,
     ) {}
 
-    ngOnInit(): void {
-        this.getRepos(this.term);
-    }
-
-    public getRepos(term: String): void {
+    getRepos(term: String): void {
         this.repos = this.githubRepoService.getRepos(term);
             // .do(v => console.log(this))
             // .catch(error => this.errorMessage = <any>error);
     }
 
-    public searchRepos(term: string): void {
+    searchRepos(term: string): void {
         this.searchTerms.next(term);
     }
 
-    /*
-    public ngOnInit(): void {
+    ngOnInit(): void {
+        // this.getRepos(this.term);
+
         this.repos = this.searchTerms
             .debounceTime(300)        // wait for 300ms pause in events
             .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap(term => term   // switch to new observable each time
                 // return the http search observable
-                ? this.githubSearchService.searchRepos(term)
+                ? this.githubRepoService.getRepos(term)
                 // or the observable of empty repos if no search term
                 : Observable.of<Repo[]>([]))
             .catch(error => {
@@ -58,6 +56,5 @@ export class AppComponent implements OnInit {
                 return Observable.of<Repo[]>([]);
             });
     }
-    */
 
 }
