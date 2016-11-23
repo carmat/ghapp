@@ -18,6 +18,7 @@ import { Issue }           from '../models/issue';
     moduleId: module.id,
     selector: 'github-app',
     templateUrl: '../templates/app.html',
+    styleUrls: [ '../../css/app.css' ],
     providers: [ GithubRepoService ],
 })
 
@@ -33,8 +34,6 @@ export class AppComponent implements OnInit {
 
     getRepos(term: String): void {
         this.repos = this.githubRepoService.getRepos(term);
-            // .do(v => console.log(this))
-            // .catch(error => this.errorMessage = <any>error);
     }
 
     searchRepos(term: string): void {
@@ -42,8 +41,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.getRepos(this.term);
-
         this.repos = this.searchTerms
             .debounceTime(300)        // wait for 300ms pause in events
             .distinctUntilChanged()   // ignore if next search term is same as previous

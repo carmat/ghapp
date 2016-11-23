@@ -1,0 +1,28 @@
+.u-align-center {
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.search-container input {
+    width: 100%;
+    font-size: 2rem;
+    padding: .5em;
+    line-height: 2;
+}
+
+.output-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.results, .issues {
+    width: auto;
+}
+
+.results {}
+
+.issues {}

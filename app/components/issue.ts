@@ -7,8 +7,8 @@ import { Issue }           from '../models/issue';
 
 @Component({
     moduleId: module.id,
-    selector: 'github-issue',
-    templateUrl: '../templates/issue.html',
+    selector: 'issues',
+    templateUrl: '../templates/issues.html',
     providers: [ GithubIssueService ],
 })
 
@@ -23,8 +23,6 @@ export class IssueComponent implements OnInit {
 
     getIssues(repoName: String): void {
         this.issues = this.githubIssueService.getIssues(repoName);
-            // .do(v => console.log(this))
-            // .catch(error => this.errorMessage = <any>error);
     }
 
     ngOnInit(): void {

@@ -20,21 +20,8 @@ export class GithubIssueService {
         private jsonp: Jsonp,
     ) {}
 
-    /*
-    searchRepos(term: string) {
-        let params = new URLSearchParams();
-
-        params.set('search', term);
-        params.set('sort', 'stars');
-        params.set('order', 'desc');
-
-        return this.jsonp.get(this.issueAPIUrl, { search: params })
-            .map(this.extractData);
-    }
-    */
-
     getIssues(repoName: String): Observable<Issue[]> {
-        this.issueAPIUrl += repoName;
+        this.issueAPIUrl = this.issueAPIUrl + repoName;
 
         return this.http.get(this.issueAPIUrl, { headers: this.headers })
                         .map(this.extractData);

@@ -1,16 +1,28 @@
-<h1>Hello Github Searcher!</h1>
+<h1 class="u-align-center">Hello Github Searcher!</h1>
 
-<input #term (keyup)="searchRepos(term.value)">
+<div class="container search-container">
+    <input #term (keyup)="searchRepos(term.value)">
+</div>
 
-<div *ngFor="let repo of repos | async">
-    <p [id]="repo.id">
-        <a href="{{ repo.html_url }}" target="_blank">{{ repo.full_name }}</a>
-    </p>
-    <p>{{ repo.description || 'No description provided for this project' }}</p>
-    <ul>
-        <li *ngIf="repo.stargazers_count > 0">Stars: {{ repo.stargazers_count }}</li>
-        <li *ngIf="repo.watchers > 0">Watchers: {{ repo.watchers }}</li>
-        <li *ngIf="repo.forks > 0">Forks: {{ repo.forks }}</li>
-        <li *ngIf="repo.has_issues">Issues: {{ repo.open_issues }}</li>
-    </ul>
+<div class="container output-container">
+    <div class="repos">
+        <h1 class="u-align-center">Repos</h1>
+
+        <div *ngFor="let repo of repos | async">
+            <p [id]="repo.id">
+                <a href="{{ repo.html_url }}" target="_blank">{{ repo.full_name }}</a>
+            </p>
+            <p>{{ repo.description || 'No description provided for this project' }}</p>
+            <ul>
+                <li *ngIf="repo.stargazers_count > 0">Stars: {{ repo.stargazers_count }}</li>
+                <li *ngIf="repo.watchers > 0">Watchers: {{ repo.watchers }}</li>
+                <li *ngIf="repo.forks > 0">Forks: {{ repo.forks }}</li>
+                <li *ngIf="repo.has_issues">Issues: {{ repo.open_issues }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="issues">
+        <issues *ngIf="false"></issues>
+    </div>
 </div>
