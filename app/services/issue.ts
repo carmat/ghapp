@@ -12,7 +12,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class GithubIssueService {
 
-    issueAPIUrl = 'https://api.github.com/search/issues?q=';
+    issues: Observable<Issue[]>;
+    issueAPIUrl = 'https://api.github.com/search/issues?q=repo:';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(
@@ -20,10 +21,11 @@ export class GithubIssueService {
         private jsonp: Jsonp,
     ) {}
 
-    getIssues(repoName: String): Observable<Issue[]> {
-        this.issueAPIUrl = this.issueAPIUrl + repoName;
+    getIssues(repo: String): Observable<Issue[]> {
+        this.issueAPIUrl = this.issueAPIUrl + repo;
 
-        return this.http.get(this.issueAPIUrl, { headers: this.headers })
+        // return this.http.get(this.issueAPIUrl, { headers: this.headers })
+        return this.http.get('https://api.github.com/search/issues?q=repo:twbs/bootstrap', { headers: this.headers })
                         .map(this.extractData);
                         // .catch(this.handleError);
     }

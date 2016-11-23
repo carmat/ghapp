@@ -26,10 +26,12 @@ export class AppComponent implements OnInit {
 
     term: string;
     repos: Observable<Repo[]>;
+    issues: Observable<Issue[]>;
     private searchTerms = new Subject<string>();
 
     constructor(
         private githubRepoService: GithubRepoService,
+        private githubIssueService: GithubIssueService,
     ) {}
 
     getRepos(term: String): void {
@@ -38,6 +40,10 @@ export class AppComponent implements OnInit {
 
     searchRepos(term: string): void {
         this.searchTerms.next(term);
+    }
+
+    viewIssues(repo: string): void {
+        this.issues = this.githubIssueService.getIssues(repo);
     }
 
     ngOnInit(): void {

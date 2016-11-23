@@ -1,1 +1,14 @@
 <h1 class="u-align-center">Issues</h1>
+
+<div *ngFor="let issue of issues | async">
+    <p [id]="issue.id">
+        <a href="{{ issue.html_url }}" target="_blank">{{ issue.title }}</a>
+        <span class="author">{{ issue.user.login }}</span>
+    </p>
+    <ul>
+        <li *ngIf="issue.state">State: {{ issue.state }}</li>
+        <li *ngIf="issue.locked">Locked?: {{ issue.locked }}</li>
+        <li>Score: {{ issue.score }}</li>
+        <li>Last updated: {{ issue.updated_at }}</li>
+    </ul>
+</div>
