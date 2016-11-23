@@ -9,8 +9,10 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
-import { GithubRepoService } from '../services/app';
+import { GithubRepoService } from '../services/repo';
+import { GithubIssueService } from '../services/issue';
 import { Repo }           from '../models/repo';
+import { Issue }           from '../models/issue';
 
 @Component({
     moduleId: module.id,

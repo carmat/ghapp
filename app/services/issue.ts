@@ -3,16 +3,16 @@ import {
     Http, Response, Headers,
     RequestOptions, Jsonp, URLSearchParams
 } from '@angular/http';
-import { Repo }           from '../models/repo';
+import { Issue }           from '../models/issue';
 
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class GithubRepoService {
+export class GithubIssueService {
 
-    apiUrl = 'https://api.github.com/search/repositories?q=';
+    issueAPIUrl = 'https://api.github.com/search/issues?q=';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(
@@ -20,23 +20,23 @@ export class GithubRepoService {
         private jsonp: Jsonp,
     ) {}
 
+    /*
     searchRepos(term: string) {
         let params = new URLSearchParams();
 
         params.set('search', term);
         params.set('sort', 'stars');
         params.set('order', 'desc');
-        // params.set('callback', 'JSONP_CALLBACK');
 
-        return this.jsonp.get(apiUrl, { search: params })
+        return this.jsonp.get(this.issueAPIUrl, { search: params })
             .map(this.extractData);
-            // .map(response => <string[]> response.json()[1]);
     }
+    */
 
-    getRepos(term: String): Observable<Repo[]> {
-        this.apiUrl += term || 'bootstrap';
+    getIssues(repoName: String): Observable<Issue[]> {
+        this.issueAPIUrl += repoName;
 
-        return this.http.get(this.apiUrl, { headers: this.headers })
+        return this.http.get(this.issueAPIUrl, { headers: this.headers })
                         .map(this.extractData);
                         // .catch(this.handleError);
     }
@@ -44,7 +44,7 @@ export class GithubRepoService {
     private extractData(result: Response) {
         let body = result.json();
 
-        return body.items as Repo[];
+        return body.items as Issue[];
     }
 
     /*
