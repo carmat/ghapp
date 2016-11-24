@@ -5,10 +5,10 @@ export class Issue {
     html_url: string;
     state: string;
     locked: string;
-    user: {};
+    user: any;
     score: number;
-    labels: [];
-    comments: [];
+    labels: any[];
+    comments: any[];
     updated_at: string;
     closed_at: string;
 }
