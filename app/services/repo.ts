@@ -34,7 +34,8 @@ export class GithubRepoService {
     */
 
     getRepos(term: String): Observable<Repo[]> {
-        this.repoAPIUrl += term || 'bootstrap';
+        console.log('calling service.getRepos()...', term);
+        this.repoAPIUrl += term;
 
         return this.http.get(this.repoAPIUrl, { headers: this.headers })
                         .map(this.extractData);

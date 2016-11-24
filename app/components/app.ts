@@ -34,12 +34,12 @@ export class AppComponent implements OnInit {
         private githubIssueService: GithubIssueService,
     ) {}
 
-    getRepos(term: String): void {
-        this.repos = this.githubRepoService.getRepos(term);
-    }
-
     searchRepos(term: string): void {
         this.searchTerms.next(term);
+    }
+
+    getRepos(term: string): void {
+        this.repos = this.githubRepoService.getRepos(term);
     }
 
     viewIssues(repo: string): void {

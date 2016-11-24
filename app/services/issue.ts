@@ -13,7 +13,7 @@ import 'rxjs/add/operator/catch';
 export class GithubIssueService {
 
     issues: Observable<Issue[]>;
-    issueAPIUrl = 'https://api.github.com/search/issues?q=repo:';
+    issueAPIUrl: string = 'https://api.github.com/search/issues?q=repo:';
     private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor(
@@ -22,14 +22,16 @@ export class GithubIssueService {
     ) {}
 
     getIssues(repo: string): Observable<Issue[]> {
+        console.log('calling service.getIssues()...', repo);
         this.issueAPIUrl = this.issueAPIUrl + repo;
 
         return this.http.get(this.issueAPIUrl, { headers: this.headers })
-                        .map(this.extractData)
+                        .map(this.extractData);
                         // .catch(this.handleError);
     }
 
     private extractData(result: Response) {
+        console.log('calling extractData()...');
         let body = result.json();
 
         return body.items as Issue[];
