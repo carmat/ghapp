@@ -21,12 +21,11 @@ export class GithubIssueService {
         private jsonp: Jsonp,
     ) {}
 
-    getIssues(repo: String): Observable<Issue[]> {
+    getIssues(repo: string): Observable<Issue[]> {
         this.issueAPIUrl = this.issueAPIUrl + repo;
 
-        // return this.http.get(this.issueAPIUrl, { headers: this.headers })
-        return this.http.get('https://api.github.com/search/issues?q=repo:twbs/bootstrap', { headers: this.headers })
-                        .map(this.extractData);
+        return this.http.get(this.issueAPIUrl, { headers: this.headers })
+                        .map(this.extractData)
                         // .catch(this.handleError);
     }
 

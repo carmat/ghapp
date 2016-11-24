@@ -21,7 +21,7 @@ export class IssueComponent implements OnInit {
         private githubIssueService: GithubIssueService,
     ) {}
 
-    getIssues(repoName: String): void {
+    getIssues(repoName: string): void {
         this.issues = this.githubIssueService.getIssues(repoName);
     }
 
